@@ -1,0 +1,39 @@
+name: dangerous_weather_app
+description: A new Flutter application.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+ersion: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  # Value equality
+  equatable: ^0.4.0
+  # Http fetching data
+  http: ^0.13.0
+  # State management
+  provider: ^5.0.0
+  # Loading animations
+  flutter_spinkit: ^5.0.0
+  # Date format
+  intl: ^0.17.0
+  # User location checking
+  geolocator: ^7.0.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/
+  fonts:
+    - family: Lato
+      fonts:
+        - asset: assets/fonts/Lato-Bold.ttf
+        - asset: assets/fonts/Lato-Regular.ttf
