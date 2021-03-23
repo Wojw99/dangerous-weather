@@ -2,7 +2,6 @@ import 'package:dangerous_weather_app/utils/constants.dart';
 import 'package:dangerous_weather_app/utils/strings.dart';
 import 'package:dangerous_weather_app/utils/styles.dart';
 import 'package:dangerous_weather_app/viewmodels/current_weather_vm.dart';
-import 'package:dangerous_weather_app/views/helpers/color_treshold.dart';
 import 'package:dangerous_weather_app/views/helpers/icon_handler.dart';
 import 'package:dangerous_weather_app/views/helpers/index.dart';
 import 'package:dangerous_weather_app/views/screens/index_screen.dart';
@@ -47,12 +46,14 @@ class CurrentWeatherScreen extends StatelessWidget {
 
   /// Navigate to IndexScreen.
   /// index - Index model to show
-  void navigateToIndexScreen(BuildContext context, Index index) {
+  void navigateToIndexScreen(BuildContext mainContext, Index index) {
     Navigator.push(
-      context,
+      mainContext,
       MaterialPageRoute(
         builder: (context) => IndexScreen(
           indexDanger: index,
+          seniorMode:
+              Provider.of<CurrentWeatherViewModel>(mainContext).seniorModeOn,
         ),
       ),
     );
@@ -70,8 +71,10 @@ class CurrentWeatherScreen extends StatelessWidget {
         title: Text(sTitle),
         actions: [
           IconButton(
-            icon: Icon(Icons.menu),
-            onPressed: () {},
+            icon: Icon(Icons.remove_red_eye),
+            onPressed: () {
+              viewModel.toggleSeniorMode();
+            },
           ),
         ],
       ),
@@ -84,7 +87,9 @@ class CurrentWeatherScreen extends StatelessWidget {
             gradient: LinearGradient(
               end: Alignment.topLeft,
               tileMode: TileMode.clamp,
-              colors: <Color>[kColorPrimaryDark, kColorPrimary],
+              colors: !viewModel.seniorModeOn
+                  ? <Color>[kColorPrimaryDark, kColorPrimary]
+                  : <Color>[kColorTextIcons, kColorTextIcons],
             ),
           ),
           child: Padding(

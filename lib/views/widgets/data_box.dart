@@ -1,5 +1,7 @@
 import 'package:dangerous_weather_app/utils/constants.dart';
+import 'package:dangerous_weather_app/viewmodels/current_weather_vm.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 
 class DataBox extends StatelessWidget {
   final String label;
@@ -10,14 +12,15 @@ class DataBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final viewModel = Provider.of<CurrentWeatherViewModel>(context);
+
     return Container(
-      width: 105.0,
       child: Row(
         children: <Widget>[
           Image(
             image: AssetImage(imageSrc),
-            height: 28.0,
-            width: 28.0,
+            height: viewModel.forMode(normal: 28.0, senior: 30.0),
+            width: viewModel.forMode(normal: 28.0, senior: 30.0),
           ),
           SizedBox(width: 8.0),
           Column(
@@ -26,16 +29,23 @@ class DataBox extends StatelessWidget {
               Text(
                 label,
                 style: TextStyle(
-                  fontSize: 13.0,
-                  color: kColorTextIconsLess,
+                  fontSize: viewModel.forMode(normal: 13.0, senior: 16.0),
+                  color: viewModel.forMode(
+                    normal: kColorTextIconsLess,
+                    senior: kColorTextIcons,
+                  ),
                 ),
               ),
               SizedBox(height: 1.0),
               Text(
                 value,
                 style: TextStyle(
-                  fontSize: 16.0,
+                  fontSize: !viewModel.seniorModeOn ? 16.0 : 19.0,
                   color: kColorTextIcons,
+                  fontWeight: viewModel.forMode(
+                    normal: FontWeight.normal,
+                    senior: FontWeight.bold,
+                  ),
                 ),
               ),
             ],

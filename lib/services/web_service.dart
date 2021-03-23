@@ -24,7 +24,7 @@ class WebService {
     }
   }
 
-  /// Fetching data from API and returns CurrentWeather model with
+  /// Fetching data from API and returns CurrentWeather model
   /// for given latitude and longitude.
   Future<CurrentWeather> getCurrentByGeo({
     double lat,

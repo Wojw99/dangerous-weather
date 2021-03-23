@@ -23,6 +23,8 @@ dependencies:
   intl: ^0.17.0
   # User location checking
   geolocator: ^7.0.1
+  # Save data in shared preferences
+  shared_preferences: ^2.0.5
 
 dev_dependencies:
   flutter_test:

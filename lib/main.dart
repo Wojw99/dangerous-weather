@@ -37,6 +37,7 @@ class _WeatherAppState extends State<WeatherApp> {
       lon = position.longitude;
       // Wait for loading current weather
       await _viewModel.loadCurrentByGeo(lat: lat, lon: lon);
+      await _viewModel.loadSettings();
       setState(() => _initialized = true);
     } catch (e) {
       // Set `_error` state to true if fetching data was failure
@@ -52,7 +53,6 @@ class _WeatherAppState extends State<WeatherApp> {
 
   @override
   Widget build(BuildContext context) {
-    print('build');
     // Show error message if fetching failed
     if (_error) {
       return LoadingAppWidget();

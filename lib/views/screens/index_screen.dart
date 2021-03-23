@@ -5,11 +5,16 @@ import 'package:dangerous_weather_app/views/helpers/index.dart';
 import 'package:dangerous_weather_app/views/widgets/alert_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class IndexScreen extends StatelessWidget {
   final Index indexDanger;
+  final bool seniorMode;
 
-  IndexScreen({@required this.indexDanger});
+  IndexScreen({
+    @required this.indexDanger,
+    this.seniorMode = false,
+  });
 
   String getIntervalNumbers(int index) {
     final current = indexDanger.intervals[index];
@@ -61,7 +66,9 @@ class IndexScreen extends StatelessWidget {
           gradient: LinearGradient(
             end: Alignment.topLeft,
             tileMode: TileMode.clamp,
-            colors: <Color>[kColorPrimaryDark, kColorPrimary],
+            colors: !seniorMode
+                ? <Color>[kColorPrimaryDark, kColorPrimary]
+                : <Color>[kColorTextIcons, kColorTextIcons],
           ),
         ),
         child: Padding(
@@ -118,7 +125,7 @@ class IndexScreen extends StatelessWidget {
                       Text(
                         current.label,
                         style: TextStyle(
-                          fontSize: 18.0,
+                          fontSize: !seniorMode ? 18.0 : 20.0,
                           color: kColorTextIcons,
                           fontWeight: FontWeight.bold,
                         ),
@@ -130,12 +137,12 @@ class IndexScreen extends StatelessWidget {
 
                       /// * * * * * * * * ROW 3 * * * * * * * *
                       Visibility(
-                        visible: !current.text.isEmpty,
+                        visible: current.text.isNotEmpty,
                         child: Text(
                           current.text,
                           style: TextStyle(
                             color: kColorTextIcons,
-                            fontSize: 16.0,
+                            fontSize: !seniorMode ? 16.0 : 20.0,
                           ),
                         ),
                       ),

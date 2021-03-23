@@ -16,7 +16,7 @@ const kColorDivider = Color(0xFFBDBDBD);
 final kDangerIndex = Index(
   name: 'Indeks zagrożeń',
   description:
-      'Wartość jest określana na bazie aktualnych wartości pozostałych trzech indeksów. Nie jest to indeks stworzony przez którąś ze światowych organizację, a jego wartość jest czysto orientacyjna i została wyliczona na potrzeby aplikacji.',
+      'Indeks zagrożeń jest określany na bazie wartości pozostałych trzech indeksów. Może zostać wykorzystany do określenia orientacyjnej sumy zagrożeń. Nie jest to oficjalny wskaźnik, jego wartość jest czysto orientacyjna i została wyliczona na potrzeby aplikacji.',
   maxValue: 300,
   intervals: [
     DangerBarInterval(
@@ -42,6 +42,8 @@ final kDangerIndex = Index(
 
 final kHeatIndex = Index(
   name: "Indeks cieplny",
+  description:
+      'Indeks cieplny (HI) jest wskaźnikiem, który łączy temperaturę powietrza i wilgotność względną w zacienionych obszarach, aby określić temperaturę równoważną odczuwaną przez człowieka, czyli jak gorąco byłoby, gdyby wilgotność miała inną wartość w cieniu. Znany także jako \"temperatura oczuwalna\".',
   maxValue: 58.0,
   intervals: [
     DangerBarInterval(
@@ -83,6 +85,8 @@ final kHeatIndex = Index(
 final kUvIndex = Index(
   name: "Indeks UV",
   maxValue: 11.0,
+  description:
+      'Indeks ultrafioletowy lub wskaźnik UV jest międzynarodowym standardowym pomiarem siły promieniowania ultrafioletowego (UV) powodującego oparzenia słoneczne w określonym miejscu i czasie.',
   intervals: [
     DangerBarInterval(
       label: "Niskie ryzyko",
@@ -124,6 +128,8 @@ final kUvIndex = Index(
 
 final kAirQualityIndex = Index(
   name: "Jakość powietrza",
+  description:
+      'Indeks jakości powietrza (AQI) jest używany przez agencje rządowe do informowania opinii publicznej o tym, jak zanieczyszczone jest obecnie powietrze lub jak przewiduje się jego zanieczyszczenie. Różne kraje mają własne wskaźniki jakości powietrza, odpowiadające różnym krajowym normom jakości powietrza ',
   maxValue: 5.0,
   intervals: [
     DangerBarInterval(

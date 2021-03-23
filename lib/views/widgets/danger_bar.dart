@@ -1,9 +1,10 @@
 import 'package:dangerous_weather_app/utils/constants.dart';
 import 'package:dangerous_weather_app/utils/styles.dart';
-import 'package:dangerous_weather_app/views/helpers/color_treshold.dart';
+import 'package:dangerous_weather_app/viewmodels/current_weather_vm.dart';
 import 'package:dangerous_weather_app/views/helpers/index.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class DangerBar extends StatelessWidget {
   final Color defaultBarColor;
@@ -38,6 +39,7 @@ class DangerBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final viewModel = Provider.of<CurrentWeatherViewModel>(context);
     double barWidth = value * barMaxWidth / index.maxValue;
 
     return GestureDetector(
@@ -48,8 +50,15 @@ class DangerBar extends StatelessWidget {
           Text(
             label,
             style: TextStyle(
-              fontSize: 18.0,
-              color: kColorTextIcons,
+              fontSize: viewModel.forMode(normal: 18.0, senior: 20.0),
+              color: viewModel.forMode(
+                normal: kColorTextIcons,
+                senior: kColorTextPrimary,
+              ),
+              fontWeight: viewModel.forMode(
+                normal: FontWeight.normal,
+                senior: FontWeight.bold,
+              ),
             ),
           ),
           SizedBox(height: 7.0),

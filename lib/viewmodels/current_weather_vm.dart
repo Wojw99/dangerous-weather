@@ -1,7 +1,7 @@
 import 'package:dangerous_weather_app/models/air_quality.dart';
 import 'package:dangerous_weather_app/models/current.dart';
 import 'package:dangerous_weather_app/models/current_weather.dart';
-import 'file:///D:/Development/GitHub/dangerous-weather/lib/views/helpers/index.dart';
+import 'package:dangerous_weather_app/models/settings.dart';
 import 'package:dangerous_weather_app/services/web_service.dart';
 import 'package:dangerous_weather_app/utils/constants.dart';
 import 'package:flutter/cupertino.dart';
@@ -16,6 +16,9 @@ class CurrentWeatherViewModel extends ChangeNotifier {
 
   AirQuality _airQuality;
   AirQuality get airQuality => _airQuality;
+
+  Settings _settings;
+  bool get seniorModeOn => _settings.seniorModeOn;
 
   /// Fetching API data and initializes _currentWeather and _city
   /// Firstly gets current weather by getCurrentByGeo()
@@ -64,6 +67,12 @@ class CurrentWeatherViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Load settings data from shared preferences
+  Future<void> loadSettings() async {
+    // TODO: read data from shared preferences
+    _settings = Settings(seniorModeOn: false);
+  }
+
   /// Counts value percent of max value for each index. Next, counts sum of them.
   double countDangerValue() {
     var heatPercent = (current.feelsLikeCelsius / kHeatIndex.maxValue) * 100;
@@ -71,5 +80,19 @@ class CurrentWeatherViewModel extends ChangeNotifier {
     var airQualityPercent =
         (airQuality.indexAQ / kAirQualityIndex.maxValue) * 100;
     return heatPercent + uvPercent + airQualityPercent;
+  }
+
+  /// Turn on/off senior mode.
+  void toggleSeniorMode() {
+    _settings.seniorModeOn = !_settings.seniorModeOn;
+    // TODO: write data to shared preferences
+    notifyListeners();
+  }
+
+  dynamic forMode({dynamic normal, dynamic senior}) {
+    if (seniorModeOn)
+      return senior;
+    else
+      return normal;
   }
 }

@@ -1,5 +1,7 @@
 import 'package:dangerous_weather_app/utils/constants.dart';
+import 'package:dangerous_weather_app/viewmodels/current_weather_vm.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 
 class MainBox extends StatelessWidget {
   final String label;
@@ -10,6 +12,8 @@ class MainBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final viewModel = Provider.of<CurrentWeatherViewModel>(context);
+
     return Column(
       children: <Widget>[
         Image(
@@ -19,7 +23,7 @@ class MainBox extends StatelessWidget {
         Text(
           label,
           style: TextStyle(
-            fontSize: 18.0,
+            fontSize: viewModel.forMode(normal: 18.0, senior: 20.0),
             color: kColorTextIcons,
             fontWeight: FontWeight.bold,
           ),
@@ -27,8 +31,11 @@ class MainBox extends StatelessWidget {
         Text(
           '${date.day}.${date.month}.${date.year}, ${date.hour}:${date.minute}',
           style: TextStyle(
-            fontSize: 14.0,
-            color: kColorTextIconsLess,
+            fontSize: viewModel.forMode(normal: 14.0, senior: 18.0),
+            color: viewModel.forMode(
+              normal: kColorTextIconsLess,
+              senior: kColorTextIcons,
+            ),
           ),
         )
       ],
