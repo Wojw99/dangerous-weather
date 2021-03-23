@@ -4,6 +4,8 @@ import 'package:dangerous_weather_app/utils/styles.dart';
 import 'package:dangerous_weather_app/viewmodels/current_weather_vm.dart';
 import 'package:dangerous_weather_app/views/helpers/color_treshold.dart';
 import 'package:dangerous_weather_app/views/helpers/icon_handler.dart';
+import 'package:dangerous_weather_app/views/helpers/index.dart';
+import 'package:dangerous_weather_app/views/screens/index_screen.dart';
 import 'package:dangerous_weather_app/views/widgets/alert_dialog.dart';
 import 'package:dangerous_weather_app/views/widgets/city_button.dart';
 import 'package:dangerous_weather_app/views/widgets/danger_bar.dart';
@@ -21,6 +23,8 @@ class CurrentWeatherScreen extends StatelessWidget {
   final hourFormat = new DateFormat('hh:mm');
   final iconHandler = IconHandler();
 
+  /// Shows dialog, waits for user input and loads new data from API
+  /// after input.
   void showInputDialog(BuildContext context) {
     final viewModel = Provider.of<CurrentWeatherViewModel>(
       context,
@@ -28,7 +32,7 @@ class CurrentWeatherScreen extends StatelessWidget {
     );
     var inputDialog = InputDialog(
       context: context,
-      title: 'Podaj miejscowość:',
+      title: '$sInputCity:',
     );
     var alertDialog =
         MyAlertDialog(context: context, title: sError, text: sErrorNotFound);
@@ -39,6 +43,19 @@ class CurrentWeatherScreen extends StatelessWidget {
         alertDialog.showThisDialog();
       });
     });
+  }
+
+  /// Navigate to IndexScreen.
+  /// index - Index model to show
+  void navigateToIndexScreen(BuildContext context, Index index) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => IndexScreen(
+          indexDanger: index,
+        ),
+      ),
+    );
   }
 
   @override
@@ -122,6 +139,7 @@ class CurrentWeatherScreen extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 65,
                                 color: kColorTextIcons,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
@@ -181,45 +199,48 @@ class CurrentWeatherScreen extends StatelessWidget {
                 Container(
                   child: Column(
                     children: <Widget>[
+                      /// * * * * * * * * * ROW 1 - HEAT * * * * * * * * *
                       DangerBar(
                         value: viewModel.current.feelsLikeCelsius,
-                        valueMax: kHeatIndexMax,
                         valueUnit: sCelsiusSign,
                         label: sHeatIndex,
-                        defaultBarColor: Colors.green,
-                        colorThresholds: [
-                          ColorThreshold(value: 27, color: Colors.yellow),
-                          ColorThreshold(value: 33, color: Colors.orange),
-                          ColorThreshold(value: 41, color: Colors.deepOrange),
-                          ColorThreshold(value: 54, color: Colors.red),
-                        ],
+                        index: kHeatIndex,
+                        onPressed: () {
+                          navigateToIndexScreen(context, kHeatIndex);
+                        },
                       ),
                       SizedBox(height: 30.0),
+
+                      /// * * * * * * * * * ROW 2 - UV * * * * * * * * *
                       DangerBar(
                         value: viewModel.current.uvi,
-                        valueMax: kUvIndexMax,
                         label: sUvIndex,
-                        defaultBarColor: Colors.green,
-                        colorThresholds: [
-                          ColorThreshold(value: 0, color: Colors.green),
-                          ColorThreshold(value: 3, color: Colors.yellow),
-                          ColorThreshold(value: 6, color: Colors.orange),
-                          ColorThreshold(value: 8, color: Colors.red),
-                          ColorThreshold(value: 11, color: Colors.deepPurple),
-                        ],
+                        index: kUvIndex,
+                        onPressed: () {
+                          navigateToIndexScreen(context, kUvIndex);
+                        },
                       ),
                       SizedBox(height: 30.0),
+
+                      /// * * * * * * * * * ROW 3 - AIR QUALITY * * * * * * * * *
                       DangerBar(
                         value: viewModel.airQuality.indexAQ,
-                        valueMax: kAirIndexMax,
                         label: sAirIndex,
-                        defaultBarColor: Colors.green,
-                        colorThresholds: [
-                          ColorThreshold(value: 0, color: Colors.green),
-                          ColorThreshold(value: 4, color: Colors.yellow),
-                          ColorThreshold(value: 7, color: Colors.orange),
-                          ColorThreshold(value: 10, color: Colors.red),
-                        ],
+                        index: kAirQualityIndex,
+                        onPressed: () {
+                          navigateToIndexScreen(context, kAirQualityIndex);
+                        },
+                      ),
+                      SizedBox(height: 30.0),
+
+                      /// * * * * * * * * * ROW 4 - DANGER * * * * * * * * *
+                      DangerBar(
+                        value: viewModel.countDangerValue(),
+                        label: kDangerIndex.name,
+                        index: kDangerIndex,
+                        onPressed: () {
+                          navigateToIndexScreen(context, kDangerIndex);
+                        },
                       ),
                       SizedBox(height: 30.0),
                     ],

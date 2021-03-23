@@ -1,4 +1,7 @@
+import 'package:dangerous_weather_app/views/helpers/danger_bar_interval.dart';
+import 'package:dangerous_weather_app/views/helpers/index.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 const kColorPrimaryDark = Color(0xFF1976D2);
 const kColorPrimary = Color(0xFF2196F3);
@@ -10,6 +13,148 @@ const kColorTextPrimary = Color(0xFF212121);
 const kColorTextSecondary = Color(0xFF757575);
 const kColorDivider = Color(0xFFBDBDBD);
 
-const kHeatIndexMax = 58.0;
-const kUvIndexMax = 11.0;
-const kAirIndexMax = 150.0;
+final kDangerIndex = Index(
+  name: 'Indeks zagrożeń',
+  description:
+      'Wartość jest określana na bazie aktualnych wartości pozostałych trzech indeksów. Nie jest to indeks stworzony przez którąś ze światowych organizację, a jego wartość jest czysto orientacyjna i została wyliczona na potrzeby aplikacji.',
+  maxValue: 300,
+  intervals: [
+    DangerBarInterval(
+      value: 0,
+      color: Colors.green,
+      label: 'Niskie ryzyko',
+      text: '',
+    ),
+    DangerBarInterval(
+      value: 70,
+      color: Colors.yellow,
+      label: 'Średnie ryzyko',
+      text: '',
+    ),
+    DangerBarInterval(
+      value: 120,
+      color: Colors.red,
+      label: 'Wysokie ryzyko',
+      text: '',
+    )
+  ],
+);
+
+final kHeatIndex = Index(
+  name: "Indeks cieplny",
+  maxValue: 58.0,
+  intervals: [
+    DangerBarInterval(
+      label: "Niskie ryzyko",
+      text: "Brak zagrożenia dla przeciętnego człowieka.",
+      value: 0,
+      color: Colors.green,
+    ),
+    DangerBarInterval(
+      label: "Średnie ryzyko",
+      text:
+          "Uwaga: przy dłuższej ekspozycji i aktywności może dojść do zmęczenia. Kontynuacja aktywności może skutkować skurczami cieplnymi.",
+      value: 27,
+      color: Colors.yellow,
+    ),
+    DangerBarInterval(
+      label: "Wysokie ryzyko",
+      text:
+          "Zalecana szczególna ostrożność: możliwe są skurcze i wyczerpanie cieplne. Ciągła aktywność może spowodować udar cieplny.",
+      value: 33,
+      color: Colors.orange,
+    ),
+    DangerBarInterval(
+      label: "Bardzo wysokie ryzyko",
+      text:
+          "Niebezpieczeństwo: prawdopodobne są skurcze i wyczerpanie cieplne; przy ciągłej aktywności prawdopodobny jest udar cieplny.",
+      value: 40,
+      color: Colors.deepOrange,
+    ),
+    DangerBarInterval(
+      label: "Ekstremalne ryzyko",
+      text: "Ekstremalne niebezpieczeństwo: udar cieplny jest nieuchronny.",
+      value: 52,
+      color: Colors.red,
+    ),
+  ],
+);
+
+final kUvIndex = Index(
+  name: "Indeks UV",
+  maxValue: 11.0,
+  intervals: [
+    DangerBarInterval(
+      label: "Niskie ryzyko",
+      text:
+          "Niskie zagrożenie ze strony promieni UV dla przeciętnego człowieka.",
+      value: 0,
+      color: Colors.green,
+    ),
+    DangerBarInterval(
+      label: "Średnie ryzyko",
+      text:
+          "Umiarkowane ryzyko uszkodzenia w przypadku niezabezpieczonej ekspozycji na słońce",
+      value: 3,
+      color: Colors.yellow,
+    ),
+    DangerBarInterval(
+      label: "Wysokie ryzyko",
+      text:
+          "Wysokie ryzyko szkód w przypadku niezabezpieczonej ekspozycji na słońce. Potrzebna jest ochrona przed uszkodzeniami skóry i oczu.",
+      value: 6,
+      color: Colors.orange,
+    ),
+    DangerBarInterval(
+      label: "Bardzo wysokie ryzyko",
+      text:
+          "Bardzo wysokie ryzyko szkód w przypadku niezabezpieczonej ekspozycji na słońce. Podejmij dodatkowe środki ostrożności, ponieważ niezabezpieczona skóra i oczy zostaną uszkodzone i mogą szybko się poparzyć.",
+      value: 8,
+      color: Colors.red,
+    ),
+    DangerBarInterval(
+      label: "Ekstremalne ryzyko",
+      text:
+          "Ekstremalne ryzyko uszkodzenia w przypadku niezabezpieczonej ekspozycji na słońce. Podejmij wszelkie środki ostrożności, ponieważ niezabezpieczona skóra i oczy mogą poparzyć w ciągu kilku minut.",
+      value: 11,
+      color: Colors.deepPurple,
+    ),
+  ],
+);
+
+final kAirQualityIndex = Index(
+  name: "Jakość powietrza",
+  maxValue: 5.0,
+  intervals: [
+    DangerBarInterval(
+        label: "Doskonałe",
+        text:
+            "Brak wpływu na zdrowie. Każdy może normalnie kontynuować swoją aktywność na świeżym powietrzu.",
+        value: 1,
+        color: Colors.green),
+    DangerBarInterval(
+        label: "Dobra",
+        text:
+            "Niektóre zanieczyszczenia mogą nieznacznie wpływać na bardzo nieliczne nadwrażliwe osoby. Tylko nieliczni nadwrażliwi ludzie powinni ograniczać aktywność na świeżym powietrzu.",
+        value: 2,
+        color: Colors.lightGreen),
+    DangerBarInterval(
+        label: "Lekko zanieczyszczone",
+        text:
+            "Zdrowe osoby mogą odczuwać lekkie podrażnienia, a osoby wrażliwe będą nieco bardziej dotknięte. ",
+        value: 3,
+        color: Colors.yellow),
+    DangerBarInterval(
+        label: "Umiarkowanie zanieczyszczone",
+        text:
+            "Osoby wrażliwe będą doświadczać poważniejszych dolegliwości. Może to mieć wpływ na serce i układ oddechowy zdrowych ludzi. Ogólna populacja powinna umiarkowanie ograniczyć aktywność na świeżym powietrzu.",
+        value: 4,
+        color: Colors.orange),
+    DangerBarInterval(
+        label: "Silnie zanieczyszczony ",
+        text:
+            "Zdrowi ludzie często wykazują objawy. Osoby z chorobami układu oddechowego lub serca będą znacznie dotknięte chorobą i będą odczuwać zmniejszoną wytrzymałość podczas wykonywania czynności. Ogólna populacja powinna ograniczyć aktywność na świeżym powietrzu.",
+        value: 5,
+        color: Colors.red),
+  ],
+);

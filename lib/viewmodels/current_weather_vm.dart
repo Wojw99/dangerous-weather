@@ -1,7 +1,9 @@
 import 'package:dangerous_weather_app/models/air_quality.dart';
 import 'package:dangerous_weather_app/models/current.dart';
 import 'package:dangerous_weather_app/models/current_weather.dart';
+import 'file:///D:/Development/GitHub/dangerous-weather/lib/views/helpers/index.dart';
 import 'package:dangerous_weather_app/services/web_service.dart';
+import 'package:dangerous_weather_app/utils/constants.dart';
 import 'package:flutter/cupertino.dart';
 
 class CurrentWeatherViewModel extends ChangeNotifier {
@@ -60,5 +62,14 @@ class CurrentWeatherViewModel extends ChangeNotifier {
     _airQuality = airQuality;
 
     notifyListeners();
+  }
+
+  /// Counts value percent of max value for each index. Next, counts sum of them.
+  double countDangerValue() {
+    var heatPercent = (current.feelsLikeCelsius / kHeatIndex.maxValue) * 100;
+    var uvPercent = (current.uvi / kUvIndex.maxValue) * 100;
+    var airQualityPercent =
+        (airQuality.indexAQ / kAirQualityIndex.maxValue) * 100;
+    return heatPercent + uvPercent + airQualityPercent;
   }
 }

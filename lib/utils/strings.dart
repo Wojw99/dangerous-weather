@@ -14,6 +14,7 @@ const sAirIndex = 'Indeks jakości powietrza';
 const sError = 'Błąd!';
 const sErrorNotFound =
     'Przepraszamy, nie udało się wczytać pogody dla podanej miejscowości.';
+const sInputCity = "Podaj miejscowość";
 
 const Map<int, String> sDescriptionsPL = {
   /// THUNDERSTORM

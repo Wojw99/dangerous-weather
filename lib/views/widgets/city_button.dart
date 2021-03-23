@@ -1,4 +1,5 @@
 import 'package:dangerous_weather_app/utils/constants.dart';
+import 'package:dangerous_weather_app/utils/styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -14,6 +15,7 @@ class CityButton extends StatelessWidget {
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         primary: kColorPrimaryDark,
+        elevation: 5.0,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(20.0))),
       ),

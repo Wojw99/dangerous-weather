@@ -23,3 +23,9 @@ const kTextFieldDecoration = InputDecoration(
     borderRadius: BorderRadius.all(Radius.circular(32.0)),
   ),
 );
+
+const kClickableBoxShadow = BoxShadow(
+  color: Color(0x26212121),
+  offset: Offset(0.0, 3.0),
+  blurRadius: 6.0,
+);
