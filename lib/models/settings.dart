@@ -1,7 +1,9 @@
 class Settings {
   bool seniorModeOn;
 
-  Settings({this.seniorModeOn});
+  /// All properties should be initialized in constructor because SettingsService
+  /// creates default Settings model if there are no data in SharedPreferences.
+  Settings({this.seniorModeOn = false});
 
   factory Settings.fromJson(Map<String, dynamic> json) {
     return Settings(
