@@ -2,6 +2,7 @@ import 'package:dangerous_weather_app/models/air_quality.dart';
 import 'package:dangerous_weather_app/models/current.dart';
 import 'package:dangerous_weather_app/models/current_weather.dart';
 import 'package:dangerous_weather_app/models/settings.dart';
+import 'package:dangerous_weather_app/services/settings_service.dart';
 import 'package:dangerous_weather_app/services/web_service.dart';
 import 'package:dangerous_weather_app/utils/constants.dart';
 import 'package:flutter/cupertino.dart';
@@ -69,8 +70,9 @@ class CurrentWeatherViewModel extends ChangeNotifier {
 
   /// Load settings data from shared preferences
   Future<void> loadSettings() async {
-    // TODO: read data from shared preferences
-    _settings = Settings(seniorModeOn: false);
+    var settingsService = SettingsService();
+    _settings = await settingsService.readData();
+    print('data read');
   }
 
   /// Counts value percent of max value for each index. Next, counts sum of them.
@@ -85,7 +87,10 @@ class CurrentWeatherViewModel extends ChangeNotifier {
   /// Turn on/off senior mode.
   void toggleSeniorMode() {
     _settings.seniorModeOn = !_settings.seniorModeOn;
-    // TODO: write data to shared preferences
+
+    var settingsService = SettingsService();
+    settingsService.saveData(_settings);
+
     notifyListeners();
   }
 

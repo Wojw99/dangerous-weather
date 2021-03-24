@@ -36,8 +36,11 @@ class _WeatherAppState extends State<WeatherApp> {
       lat = position.latitude;
       lon = position.longitude;
       // Wait for loading current weather
+      print("await for geo");
       await _viewModel.loadCurrentByGeo(lat: lat, lon: lon);
+      print("await for settings");
       await _viewModel.loadSettings();
+      print("initialized = true");
       setState(() => _initialized = true);
     } catch (e) {
       // Set `_error` state to true if fetching data was failure

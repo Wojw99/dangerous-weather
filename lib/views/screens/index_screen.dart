@@ -8,7 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class IndexScreen extends StatelessWidget {
+  /// Current Index object with information about index (UV, Heat, Air). Must
+  /// be passed to the IndexScreen in the constructor.
   final Index indexDanger;
+
+  /// If senior mode is on, colors are more in contrast to each other.
   final bool seniorMode;
 
   IndexScreen({
@@ -16,6 +20,10 @@ class IndexScreen extends StatelessWidget {
     this.seniorMode = false,
   });
 
+  /// Combine value of intervals with indexes i and i + 1; example:
+  /// i = 0 : "< 2",
+  /// i = 1 : "2 - 4",
+  /// etc.
   String getIntervalNumbers(int index) {
     final current = indexDanger.intervals[index];
     final length = indexDanger.intervals.length;

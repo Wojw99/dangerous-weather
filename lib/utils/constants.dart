@@ -16,7 +16,7 @@ const kColorDivider = Color(0xFFBDBDBD);
 final kDangerIndex = Index(
   name: 'Indeks zagrożeń',
   description:
-      'Indeks zagrożeń jest określany na bazie wartości pozostałych trzech indeksów. Może zostać wykorzystany do określenia orientacyjnej sumy zagrożeń. Nie jest to oficjalny wskaźnik, jego wartość jest czysto orientacyjna i została wyliczona na potrzeby aplikacji.',
+      'Indeks zagrożeń jest określany na bazie wartości pozostałych trzech indeksów. Może zostać wykorzystany do określenia orientacyjnej sumy zagrożeń. Nie jest to oficjalny wskaźnik, jego wartość została wyliczona na potrzeby aplikacji.',
   maxValue: 300,
   intervals: [
     DangerBarInterval(
@@ -47,7 +47,7 @@ final kHeatIndex = Index(
   maxValue: 58.0,
   intervals: [
     DangerBarInterval(
-      label: "Niskie ryzyko",
+      label: "Brak ryzyka",
       text: "Brak zagrożenia dla przeciętnego człowieka.",
       value: 0,
       color: Colors.green,

@@ -38,9 +38,11 @@ class CurrentWeatherScreen extends StatelessWidget {
 
     // shows dialog and waits for user input
     inputDialog.showInputDialog().then((value) {
-      viewModel.loadCurrentByCity(value).catchError((error) {
-        alertDialog.showThisDialog();
-      });
+      if (value != null) {
+        viewModel.loadCurrentByCity(value).catchError((error) {
+          alertDialog.showThisDialog();
+        });
+      }
     });
   }
 
@@ -80,18 +82,18 @@ class CurrentWeatherScreen extends StatelessWidget {
       ),
 
       /// * * * * * * * * * BODY * * * * * * * * *
-      body: SingleChildScrollView(
-        child: Container(
-          // color: kColorPrimary,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              end: Alignment.topLeft,
-              tileMode: TileMode.clamp,
-              colors: !viewModel.seniorModeOn
-                  ? <Color>[kColorPrimaryDark, kColorPrimary]
-                  : <Color>[kColorTextIcons, kColorTextIcons],
-            ),
+      body: Container(
+        // color: kColorPrimary,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            end: Alignment.topLeft,
+            tileMode: TileMode.clamp,
+            colors: !viewModel.seniorModeOn
+                ? <Color>[kColorPrimaryDark, kColorPrimary]
+                : <Color>[kColorTextIcons, kColorTextIcons],
           ),
+        ),
+        child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24.0),
             child: Column(
