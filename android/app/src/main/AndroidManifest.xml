@@ -2,8 +2,8 @@
     package="com.example.dangerous_weather_app">
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <application
-        android:label="dangerous_weather_app"
-        android:icon="@mipmap/ic_launcher">
+        android:label="DangApp"
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

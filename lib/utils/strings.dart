@@ -1,4 +1,4 @@
-const sTitle = 'Zagrożynka';
+const sTitle = 'DangApp';
 
 const sCelsiusSign = '°';
 const sWind = 'Wiatr';
