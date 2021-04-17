@@ -1,6 +1,8 @@
 # DangApp
 Another project of mobile weather appliaction but with a focus on presenting weather indexes (heat, UVI, air) and alerts. For people who want to know when the current weather is danger. Made with Flutter. 
 
+The application uses weather API from [OpenWeatherMap](https://openweathermap.org/) 
+
 ![UI Image](https://github.com/Wojw99/dangerous-weather/blob/main/ui-image.png?raw=true)
 
 ### Functionality
